@@ -64,13 +64,17 @@ public class MainActivity extends AppCompatActivity {
         layout.setVisibility(View.INVISIBLE);
 
         GridLayout grid_Layout = (GridLayout) findViewById(R.id.gridLayout);
-        Toast.makeText(MainActivity.this, "" + grid_Layout.getChildCount(), Toast.LENGTH_SHORT).show();
+        for(int i = 0;i<9;i++){
+            ImageView img =(ImageView) findViewById(R.id.gridLayout).findViewWithTag("" + i);
+            img.setImageResource(0);
+        }
+      //  Toast.makeText(MainActivity.this, "" + grid_Layout.getChildCount(), Toast.LENGTH_SHORT).show();
     }
     int num_turn = 0;
     public void drop(View view){
         ImageView counter = (ImageView) view;
         int fo = Integer.parseInt(counter.getTag().toString());
-        if(board[fo] == -1 && num_turn < 10) {
+        if(board[fo] == -1 && num_turn < 9) {
             num_turn++;
             counter.setTranslationY(-1000f);
             if (count == 0) {
@@ -94,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
             //Toast.makeText(MainActivity.this, "" + stat, Toast.LENGTH_SHORT).show();
         }
-        if(num_turn == 10){
+        if(num_turn == 9 && get_status() == -1){
             TextView text = (TextView) findViewById(R.id.winnermessage);
             text.setText("Match Drawn");
             LinearLayout layout = (LinearLayout) findViewById(R.id.linear);
